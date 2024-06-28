@@ -33,7 +33,6 @@ ARG project
 ARG workdir
 ARG target
 
-WORKDIR ${workdir}/bin
 COPY --from=builder /${workdir}/target/${target}/release/${project} .
 
 ENTRYPOINT [ "action-release" ]
