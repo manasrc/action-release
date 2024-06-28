@@ -17,7 +17,6 @@ ARG target
 RUN apk add --no-cache musl-dev
 RUN rustup target add ${target}
 
-WORKDIR ${workdir}
 COPY . .
 
 RUN cargo build --target ${target} --release
@@ -33,6 +32,6 @@ ARG project
 ARG workdir
 ARG target
 
-COPY --from=builder /${workdir}/target/${target}/release/${project} .
+COPY --from=builder ${GITHUB_WORKSPACE}/target/${target}/release/${project} .
 
 ENTRYPOINT [ "action-release" ]
