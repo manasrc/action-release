@@ -33,13 +33,7 @@ ARG project
 ARG workdir
 ARG target
 
-RUN addgroup -g 1000 $org 
-RUN adduser -D -s /bin/sh -u 1000 -G ${org} ${project}
-
 WORKDIR ${workdir}/bin
 COPY --from=builder /${workdir}/target/${target}/release/${project} .
-
-RUN chown ${org}:${project} ${project} 
-USER ${project} 
 
 ENTRYPOINT [ "${project}" ]
