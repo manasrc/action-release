@@ -1,0 +1,22 @@
+name: testing 
+
+on:
+  push:
+    branches:
+      - master 
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up source
+        uses: actions/checkout@v4
+
+      - name: Set up version
+        run: echo "version=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+
+      - name: acation-release
+        uses: ./
+        with:
+          version: ${{ env.version }}
