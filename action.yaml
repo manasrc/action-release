@@ -1,0 +1,22 @@
+name: 'action-release'
+description: 'github action to release'
+
+inputs:
+  token:
+    required: false
+    default: ${{ github.token }}
+  repository:
+    required: false
+    default: ${{ github.repository }}
+  sha:
+    required: false
+    default: ${{ github.sha }}
+
+  version:
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.version }}
